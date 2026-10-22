@@ -1,0 +1,15 @@
+# 依賴與可重建產出（不進版控）
+影片/plants/deck/node_modules/
+影片/plants/renders/
+影片/plants/deck/thumbs/
+影片/plants/deck/media/silent/
+影片/plants/assets/fonts/
+影片/plants/.hyperframes/
+影片/plants/voice_tmp/
+影片/plants/deck/media/*_voice.mp4
+教學網頁/_qa/
+**/_qa/
+**/__pycache__/
+*.pyc
+~$*
+desktop.ini

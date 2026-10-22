@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>植物的構造和生長 — 動畫片段</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "GenSeki";
+        src: url("assets/fonts/GenSekiGothic2TW-M.otf") format("opentype");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "GenSeki";
+        src: url("assets/fonts/GenSekiGothic2TW-H.otf") format("opentype");
+        font-weight: 700;
+        font-style: normal;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #121212; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #121212; }
+      .scene { position: absolute; inset: 0; background: #121212; }
+      .eyebrow {
+        position: absolute; left: 80px; top: 62px;
+        font-family: "GenSeki"; font-weight: 700; font-size: 24px;
+        letter-spacing: 0.18em; color: #FF7A1A;
+      }
+      .page-no {
+        position: absolute; right: 80px; top: 62px;
+        font-family: "GenSeki"; font-weight: 400; font-size: 24px;
+        letter-spacing: 0.12em; color: #6E6A62;
+      }
+      .h1 {
+        position: absolute; font-family: "GenSeki"; font-weight: 700;
+        color: #F2F0EA; line-height: 1.15;
+      }
+      .lead {
+        position: absolute; font-family: "GenSeki"; font-weight: 400;
+        color: #B9B4A9; line-height: 1.5;
+      }
+      .accent { color: #FF7A1A; }
+      .row { position: absolute; display: flex; align-items: center; }
+      .chip {
+        width: 62px; height: 62px; border-radius: 31px; flex: none;
+        display: flex; align-items: center; justify-content: center;
+        font-family: "GenSeki"; font-weight: 700; font-size: 30px; color: #121212;
+        background: #FF7A1A;
+      }
+      .row-name {
+        font-family: "GenSeki"; font-weight: 700; font-size: 40px; color: #F2F0EA;
+        margin-left: 26px; width: 130px;
+      }
+      .row-desc {
+        font-family: "GenSeki"; font-weight: 400; font-size: 27px; color: #A8A399;
+        margin-left: 8px;
+      }
+      .card {
+        position: absolute; background: #1C1C1C; border-left: 6px solid #FF7A1A;
+        border-radius: 10px;
+      }
+      .card-title {
+        position: absolute; left: 34px; top: 26px;
+        font-family: "GenSeki"; font-weight: 700; font-size: 36px; color: #F2F0EA;
+      }
+      .card-body {
+        position: absolute; left: 34px; top: 82px; width: 560px;
+        font-family: "GenSeki"; font-weight: 400; font-size: 24px; color: #A8A399;
+        line-height: 1.45;
+      }
+      .endline {
+        position: absolute; font-family: "GenSeki"; font-weight: 700;
+        color: #FF7A1A;
+      }
+      svg text { font-family: "GenSeki"; }
+      .stage-card {
+        position: absolute; background: #1B1B1B; border-radius: 18px;
+        border: 2px solid #2C2C2C;
+      }
+      .stage-name {
+        position: absolute; width: 100%; text-align: center;
+        font-family: "GenSeki"; font-weight: 700; font-size: 44px; color: #F2F0EA;
+      }
+      .stage-fn {
+        position: absolute; width: 100%; text-align: center;
+        font-family: "GenSeki"; font-weight: 400; font-size: 24px; color: #A8A399;
+      }
+      .arrow { position: absolute; }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-width="1920"
+      data-height="1080"
+      data-duration="51"
+    >
+      <!-- ══════════ 01 六大構造（0–12s） ══════════ -->
+      <section id="s1" class="clip scene" data-start="0" data-duration="12" data-track-index="0">
+        <div class="eyebrow">自然科學・三年級</div>
+        <div class="page-no">01 / 04</div>
+        <div class="h1" id="s1-title" style="left:80px; top:130px; width:860px; font-size:76px">
+          植物有六個<br />基本構造
+        </div>
+
+        <svg id="s1-plant" width="700" height="760" viewBox="250 80 640 700"
+             style="position:absolute; left:150px; top:290px">
+          <!-- 土壤 -->
+          <rect x="60" y="560" width="780" height="220" fill="#241C17" />
+          <line x1="60" y1="560" x2="840" y2="560" stroke="#4A3A2C" stroke-width="4" />
+          <!-- 根 -->
+          <g stroke="#C9A227" stroke-width="9" fill="none" stroke-linecap="round">
+            <path d="M450 560 L450 700" />
+            <path d="M450 610 C410 650 380 680 350 720" />
+            <path d="M450 620 C490 660 520 690 560 730" />
+            <path d="M450 660 C430 700 420 720 405 755" />
+            <path d="M450 670 C475 700 490 720 505 755" />
+            <path d="M400 690 C380 700 365 705 345 710" />
+            <path d="M500 700 C525 712 545 716 565 720" />
+          </g>
+          <!-- 莖 -->
+          <path d="M450 560 L450 230" stroke="#4C9A2A" stroke-width="22" stroke-linecap="round" fill="none" />
+          <!-- 葉 -->
+          <path d="M450 430 C360 420 315 360 355 325 C400 290 445 355 450 430" fill="#5FB33F" />
+          <path d="M450 350 C540 340 585 280 545 245 C500 210 455 275 450 350" fill="#6FC24C" />
+          <path d="M450 430 C400 400 370 380 350 360" stroke="#2F6B1B" stroke-width="4" fill="none" />
+          <path d="M450 350 C500 320 530 300 550 280" stroke="#2F6B1B" stroke-width="4" fill="none" />
+          <!-- 花 -->
+          <g id="s1-flower">
+            <g fill="#FFB03A">
+              <ellipse cx="450" cy="150" rx="26" ry="52" />
+              <ellipse cx="450" cy="150" rx="26" ry="52" transform="rotate(60 450 150)" />
+              <ellipse cx="450" cy="150" rx="26" ry="52" transform="rotate(120 450 150)" />
+              <ellipse cx="450" cy="150" rx="26" ry="52" transform="rotate(180 450 150)" />
+              <ellipse cx="450" cy="150" rx="26" ry="52" transform="rotate(240 450 150)" />
+              <ellipse cx="450" cy="150" rx="26" ry="52" transform="rotate(300 450 150)" />
+            </g>
+            <circle cx="450" cy="150" r="22" fill="#FF7A1A" />
+          </g>
+          <!-- 果實 -->
+          <g id="s1-fruit">
+            <circle cx="615" cy="405" r="44" fill="#E8601A" />
+            <path d="M615 361 C615 340 628 328 648 326" stroke="#4C9A2A" stroke-width="7" fill="none" stroke-linecap="round" />
+          </g>
+          <!-- 種子 -->
+          <g id="s1-seed">
+            <ellipse cx="760" cy="680" rx="34" ry="24" fill="#D9B44A" />
+            <path d="M760 664 C768 650 782 648 790 652" stroke="#8A6D1F" stroke-width="4" fill="none" />
+          </g>
+
+          <!-- 標記 -->
+          <g id="m1" opacity="0">
+            <circle cx="450" cy="700" r="34" fill="#FF7A1A" />
+            <text x="450" y="712" text-anchor="middle" font-size="34" font-weight="700" fill="#121212">1</text>
+          </g>
+          <g id="m2" opacity="0">
+            <circle cx="486" cy="486" r="34" fill="#FF7A1A" />
+            <text x="486" y="498" text-anchor="middle" font-size="34" font-weight="700" fill="#121212">2</text>
+          </g>
+          <g id="m3" opacity="0">
+            <circle cx="322" cy="356" r="34" fill="#FF7A1A" />
+            <text x="322" y="368" text-anchor="middle" font-size="34" font-weight="700" fill="#121212">3</text>
+          </g>
+          <g id="m4" opacity="0">
+            <circle cx="450" cy="150" r="34" fill="#FF7A1A" />
+            <text x="450" y="162" text-anchor="middle" font-size="34" font-weight="700" fill="#121212">4</text>
+          </g>
+          <g id="m5" opacity="0">
+            <circle cx="615" cy="405" r="34" fill="#FF7A1A" />
+            <text x="615" y="417" text-anchor="middle" font-size="34" font-weight="700" fill="#121212">5</text>
+          </g>
+          <g id="m6" opacity="0">
+            <circle cx="760" cy="680" r="34" fill="#FF7A1A" />
+            <text x="760" y="692" text-anchor="middle" font-size="34" font-weight="700" fill="#121212">6</text>
+          </g>
+        </svg>
+
+        <div class="row" id="r1" style="left:1010px; top:300px">
+          <div class="chip">1</div><div class="row-name">根</div><div class="row-desc">吸收水分與礦物質</div>
+        </div>
+        <div class="row" id="r2" style="left:1010px; top:395px">
+          <div class="chip">2</div><div class="row-name">莖</div><div class="row-desc">支持與運輸</div>
+        </div>
+        <div class="row" id="r3" style="left:1010px; top:490px">
+          <div class="chip">3</div><div class="row-name">葉</div><div class="row-desc">製造養分</div>
+        </div>
+        <div class="row" id="r4" style="left:1010px; top:585px">
+          <div class="chip">4</div><div class="row-name">花</div><div class="row-desc">傳粉、產生種子</div>
+        </div>
+        <div class="row" id="r5" style="left:1010px; top:680px">
+          <div class="chip">5</div><div class="row-name">果實</div><div class="row-desc">保護種子</div>
+        </div>
+        <div class="row" id="r6" style="left:1010px; top:775px">
+          <div class="chip">6</div><div class="row-name">種子</div><div class="row-desc">繁殖下一代</div>
+        </div>
+
+        <div class="endline" id="s1-end" style="left:1010px; top:910px; font-size:34px; opacity:0">
+          六個構造，各司其職。
+        </div>
+      </section>
+
+      <!-- ══════════ 02 根吸水（12–24s） ══════════ -->
+      <section id="s2" class="clip scene" data-start="12" data-duration="12" data-track-index="1">
+        <div class="eyebrow">構造 1・根</div>
+        <div class="page-no">02 / 04</div>
+        <div class="h1" id="s2-title" style="left:90px; top:130px; width:760px; font-size:76px">
+          根怎麼吸水？
+        </div>
+
+        <div class="card" id="c1" style="left:90px; top:320px; width:760px; height:160px">
+          <div class="card-title">根毛：增加吸收面積</div>
+          <div class="card-body">根毛又細又多，讓根和土壤接觸的表面積變大。</div>
+        </div>
+        <div class="card" id="c2" style="left:90px; top:510px; width:760px; height:160px">
+          <div class="card-title">吸收水分與礦物質</div>
+          <div class="card-body">土壤中的水和礦物質，從根毛進入植物體內。</div>
+        </div>
+        <div class="card" id="c3" style="left:90px; top:700px; width:760px; height:160px">
+          <div class="card-title">固定植物</div>
+          <div class="card-body">根把植物牢牢抓住，讓它站得穩。</div>
+        </div>
+
+        <svg width="820" height="760" viewBox="0 0 860 760"
+             style="position:absolute; left:980px; top:250px">
+          <rect x="40" y="300" width="790" height="440" rx="12" fill="#2B211A" />
+          <text x="70" y="345" font-size="24" font-weight="400" fill="#7A6A58">土壤</text>
+          <!-- 主根 -->
+          <path d="M450 30 L450 690" stroke="#C9A227" stroke-width="24" fill="none" stroke-linecap="round" />
+          <path d="M450 300 C400 360 370 420 345 500" stroke="#C9A227" stroke-width="10" fill="none" stroke-linecap="round" />
+          <path d="M450 340 C505 400 540 460 565 540" stroke="#C9A227" stroke-width="10" fill="none" stroke-linecap="round" />
+          <path d="M450 430 C420 500 400 560 385 630" stroke="#C9A227" stroke-width="8" fill="none" stroke-linecap="round" />
+          <path d="M450 470 C485 530 510 585 525 640" stroke="#C9A227" stroke-width="8" fill="none" stroke-linecap="round" />
+          <!-- 根毛 -->
+          <g stroke="#E8CC6A" stroke-width="4" stroke-linecap="round">
+            <line x1="442" y1="360" x2="412" y2="352" /><line x1="458" y1="390" x2="490" y2="382" />
+            <line x1="441" y1="440" x2="408" y2="432" /><line x1="459" y1="470" x2="492" y2="462" />
+            <line x1="427" y1="520" x2="398" y2="512" /><line x1="472" y1="540" x2="502" y2="532" />
+            <line x1="414" y1="580" x2="384" y2="572" /><line x1="487" y1="600" x2="517" y2="592" />
+            <line x1="398" y1="640" x2="368" y2="632" /><line x1="504" y1="650" x2="534" y2="642" />
+          </g>
+          <!-- 水與礦物質 -->
+          <g id="drops">
+            <circle class="drop" cx="120" cy="420" r="11" fill="#4EA8DE" />
+            <circle class="drop" cx="180" cy="520" r="9" fill="#4EA8DE" />
+            <circle class="drop" cx="140" cy="640" r="12" fill="#4EA8DE" />
+            <circle class="drop" cx="230" cy="600" r="8" fill="#4EA8DE" />
+            <circle class="drop" cx="260" cy="450" r="10" fill="#4EA8DE" />
+            <circle class="drop" cx="300" cy="690" r="11" fill="#4EA8DE" />
+            <circle class="drop" cx="640" cy="420" r="10" fill="#4EA8DE" />
+            <circle class="drop" cx="700" cy="520" r="9" fill="#4EA8DE" />
+            <circle class="drop" cx="680" cy="650" r="12" fill="#4EA8DE" />
+            <circle class="drop" cx="740" cy="600" r="8" fill="#4EA8DE" />
+            <circle class="drop" cx="600" cy="470" r="10" fill="#4EA8DE" />
+            <circle class="drop" cx="580" cy="690" r="11" fill="#4EA8DE" />
+            <circle class="drop" cx="340" cy="540" r="8" fill="#4EA8DE" />
+            <circle class="drop" cx="520" cy="560" r="9" fill="#4EA8DE" />
+          </g>
+          <!-- 向上流動 -->
+          <g id="upflow" opacity="0">
+            <circle class="up" cx="450" cy="640" r="10" fill="#4EA8DE" />
+            <circle class="up" cx="450" cy="560" r="10" fill="#4EA8DE" />
+            <circle class="up" cx="450" cy="480" r="10" fill="#4EA8DE" />
+            <circle class="up" cx="450" cy="400" r="10" fill="#4EA8DE" />
+          </g>
+          <text x="480" y="660" font-size="30" font-weight="700" fill="#FF7A1A">根毛吸水</text>
+        </svg>
+
+        <div class="endline" id="s2-end" style="left:90px; top:930px; width:1600px; font-size:38px; opacity:0">
+          根：吸收水分與礦物質，順便抓住土壤。
+        </div>
+      </section>
+
+      <!-- ══════════ 03 莖運輸（24–36s） ══════════ -->
+      <section id="s3" class="clip scene" data-start="24" data-duration="12" data-track-index="2">
+        <div class="eyebrow">構造 2・莖</div>
+        <div class="page-no">03 / 04</div>
+        <div class="h1" id="s3-title" style="left:90px; top:130px; width:800px; font-size:76px">
+          莖裡的運輸通道
+        </div>
+
+        <svg width="620" height="770" viewBox="0 0 600 760"
+             style="position:absolute; left:110px; top:270px">
+          <!-- 莖的外形 -->
+          <rect x="230" y="20" width="150" height="700" rx="26" fill="#3A2E24" />
+          <rect x="248" y="20" width="114" height="700" rx="18" fill="#4A3A2C" />
+          <!-- 運輸管 -->
+          <line id="tubeA" x1="285" y1="40" x2="285" y2="700" stroke="#4EA8DE" stroke-width="10" stroke-linecap="round" />
+          <line id="tubeB" x1="330" y1="40" x2="330" y2="700" stroke="#FF7A1A" stroke-width="10" stroke-linecap="round" />
+          <!-- 節 -->
+          <line x1="230" y1="200" x2="380" y2="200" stroke="#6B5640" stroke-width="6" />
+          <line x1="230" y1="420" x2="380" y2="420" stroke="#6B5640" stroke-width="6" />
+          <line x1="230" y1="600" x2="380" y2="600" stroke="#6B5640" stroke-width="6" />
+          <!-- 水滴 -->
+          <g id="stemUp">
+            <circle class="rise" cx="285" cy="680" r="11" fill="#4EA8DE" />
+            <circle class="rise" cx="285" cy="680" r="11" fill="#4EA8DE" />
+            <circle class="rise" cx="285" cy="680" r="11" fill="#4EA8DE" />
+            <circle class="rise" cx="285" cy="680" r="11" fill="#4EA8DE" />
+            <circle class="rise" cx="285" cy="680" r="11" fill="#4EA8DE" />
+            <circle class="rise" cx="285" cy="680" r="11" fill="#4EA8DE" />
+          </g>
+          <!-- 養分往下 -->
+          <g id="stemDown">
+            <circle class="sink" cx="330" cy="70" r="10" fill="#FF7A1A" />
+            <circle class="sink" cx="330" cy="70" r="10" fill="#FF7A1A" />
+            <circle class="sink" cx="330" cy="70" r="10" fill="#FF7A1A" />
+            <circle class="sink" cx="330" cy="70" r="10" fill="#FF7A1A" />
+          </g>
+          <text x="410" y="120" font-size="28" font-weight="700" fill="#4EA8DE">水分往上</text>
+          <text x="410" y="700" font-size="28" font-weight="700" fill="#FF7A1A">養分往下</text>
+          <text x="120" y="120" font-size="28" font-weight="400" fill="#8A8072">節</text>
+        </svg>
+
+        <div class="card" id="s3c1" style="left:830px; top:290px; width:950px; height:170px">
+          <div class="card-title">支持植物</div>
+          <div class="card-body">莖把葉子和花撐高，讓葉子能照到陽光。</div>
+        </div>
+        <div class="card" id="s3c2" style="left:830px; top:490px; width:950px; height:170px">
+          <div class="card-title">運輸水分與養分</div>
+          <div class="card-body">莖裡有細細的通道，把水和養分送到植物全身。</div>
+        </div>
+        <div class="card" id="s3c3" style="left:830px; top:690px; width:950px; height:170px">
+          <div class="card-title">草莖與木莖</div>
+          <div class="card-body">草莖柔軟（如蔥）；木莖堅硬（如樟樹）。</div>
+        </div>
+
+        <div class="endline" id="s3-end" style="left:830px; top:900px; font-size:34px; opacity:0">
+          莖：支持植物，也負責運送。
+        </div>
+      </section>
+
+      <!-- ══════════ 04 花→果實→種子（36–51s） ══════════ -->
+      <section id="s4" class="clip scene" data-start="36" data-duration="15" data-track-index="3">
+        <div class="eyebrow">構造 4・5・6</div>
+        <div class="page-no">04 / 04</div>
+        <div class="h1" id="s4-title" style="left:90px; top:120px; width:1200px; font-size:72px">
+          從花到種子
+        </div>
+
+        <!-- 花 -->
+        <div class="stage-card" id="st1" style="left:90px; top:300px; width:460px; height:520px; opacity:0">
+          <svg width="460" height="330" viewBox="0 0 460 330" style="position:absolute; left:0; top:20px">
+            <g id="s4-flower" transform="translate(230 160)">
+              <g fill="#FFB03A">
+                <ellipse cx="0" cy="-70" rx="30" ry="62" />
+                <ellipse cx="0" cy="-70" rx="30" ry="62" transform="rotate(60)" />
+                <ellipse cx="0" cy="-70" rx="30" ry="62" transform="rotate(120)" />
+                <ellipse cx="0" cy="-70" rx="30" ry="62" transform="rotate(180)" />
+                <ellipse cx="0" cy="-70" rx="30" ry="62" transform="rotate(240)" />
+                <ellipse cx="0" cy="-70" rx="30" ry="62" transform="rotate(300)" />
+              </g>
+              <circle r="26" fill="#FF7A1A" />
+            </g>
+          </svg>
+          <div class="stage-name" style="top:370px">花</div>
+          <div class="stage-fn" style="top:435px">傳粉，產生種子</div>
+        </div>
+
+        <!-- 箭頭 1 -->
+        <svg class="arrow" id="ar1" width="150" height="60" viewBox="0 0 150 60"
+             style="left:575px; top:530px">
+          <line x1="10" y1="30" x2="120" y2="30" stroke="#FF7A1A" stroke-width="8" stroke-linecap="round" />
+          <path d="M112 10 L140 30 L112 50" fill="none" stroke="#FF7A1A" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+
+        <!-- 果實 -->
+        <div class="stage-card" id="st2" style="left:740px; top:300px; width:460px; height:520px; opacity:0">
+          <svg width="460" height="330" viewBox="0 0 460 330" style="position:absolute; left:0; top:20px">
+            <g id="s4-fruit" transform="translate(230 165)">
+              <circle r="105" fill="#E8601A" />
+              <path d="M0 -105 C0 -140 22 -158 55 -162" stroke="#4C9A2A" stroke-width="10" fill="none" stroke-linecap="round" />
+              <g fill="#D9B44A">
+                <ellipse cx="-38" cy="-10" rx="17" ry="26" transform="rotate(-20 -38 -10)" />
+                <ellipse cx="6" cy="18" rx="17" ry="26" transform="rotate(12 6 18)" />
+                <ellipse cx="44" cy="-24" rx="17" ry="26" transform="rotate(28 44 -24)" />
+                <ellipse cx="-14" cy="56" rx="17" ry="26" transform="rotate(-8 -14 56)" />
+              </g>
+            </g>
+          </svg>
+          <div class="stage-name" style="top:370px">果實</div>
+          <div class="stage-fn" style="top:435px">保護種子、幫助傳播</div>
+        </div>
+
+        <!-- 箭頭 2 -->
+        <svg class="arrow" id="ar2" width="150" height="60" viewBox="0 0 150 60"
+             style="left:1225px; top:530px">
+          <line x1="10" y1="30" x2="120" y2="30" stroke="#FF7A1A" stroke-width="8" stroke-linecap="round" />
+          <path d="M112 10 L140 30 L112 50" fill="none" stroke="#FF7A1A" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+
+        <!-- 種子 -->
+        <div class="stage-card" id="st3" style="left:1390px; top:300px; width:440px; height:520px; opacity:0">
+          <svg width="440" height="330" viewBox="0 0 440 330" style="position:absolute; left:0; top:20px">
+            <g id="s4-seeds" transform="translate(220 170)">
+              <g fill="#D9B44A">
+                <ellipse cx="-90" cy="10" rx="34" ry="24" />
+                <ellipse cx="0" cy="-10" rx="34" ry="24" />
+                <ellipse cx="90" cy="10" rx="34" ry="24" />
+              </g>
+              <path d="M0 -34 C0 -62 14 -78 34 -84" stroke="#5FB33F" stroke-width="8" fill="none" stroke-linecap="round" />
+              <path d="M34 -84 C52 -96 62 -92 64 -80 C52 -72 40 -74 34 -84" fill="#6FC24C" />
+              <path d="M34 -84 C16 -96 8 -92 6 -80 C18 -72 28 -74 34 -84" fill="#5FB33F" />
+            </g>
+          </svg>
+          <div class="stage-name" style="top:370px">種子</div>
+          <div class="stage-fn" style="top:435px">長成新的植物</div>
+        </div>
+
+        <div class="endline" id="s4-end" style="left:90px; top:900px; width:1700px; font-size:40px; opacity:0">
+          花 → 果實 → 種子：植物繁衍下一代的流程。
+        </div>
+      </section>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      // ── 01 六大構造 ──────────────────────────────
+      tl.fromTo("#s1-title", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 0.2);
+      const rows = ["#r1", "#r2", "#r3", "#r4", "#r5", "#r6"];
+      const marks = ["#m1", "#m2", "#m3", "#m4", "#m5", "#m6"];
+      rows.forEach((sel, i) => {
+        const t = 1.4 + i * 0.62;
+        tl.fromTo(sel, { opacity: 0, x: 46 }, { opacity: 1, x: 0, duration: 0.55, ease: "power2.out" }, t);
+        tl.fromTo(marks[i], { opacity: 0, scale: 0.2, transformOrigin: "50% 50%" },
+          { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2)" }, t + 0.05);
+      });
+      tl.to("#s1-end", { opacity: 1, duration: 0.6 }, 8.2);
+
+      // ── 02 根吸水 ────────────────────────────────
+      tl.fromTo("#s2-title", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 12.2);
+      ["#c1", "#c2", "#c3"].forEach((sel, i) => {
+        tl.fromTo(sel, { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.55, ease: "power2.out" }, 12.9 + i * 0.5);
+      });
+      const dropTargets = [
+        [330, 350], [338, 430], [360, 505], [390, 545], [330, 600], [350, 660],
+        [560, 355], [555, 430], [535, 505], [545, 560], [520, 610], [500, 660],
+        [370, 390], [520, 420], [405, 620], [480, 590],
+      ];
+      gsap.utils.toArray("#drops .drop").forEach((d, i) => {
+        const target = dropTargets[i % dropTargets.length];
+        tl.to(d, {
+          x: target[0] - Number(d.getAttribute("cx")),
+          y: target[1] - Number(d.getAttribute("cy")),
+          opacity: 0,
+          duration: 1.15,
+          ease: "power1.in",
+        }, 13.6 + i * 0.16);
+      });
+      tl.to("#upflow", { opacity: 1, duration: 0.3 }, 17.2);
+      gsap.utils.toArray("#upflow .up").forEach((d, i) => {
+        tl.fromTo(d, { y: 0, opacity: 0 }, { y: -300, opacity: 1, duration: 3.6, ease: "none" }, 17.3 + i * 0.35);
+      });
+      tl.to("#s2-end", { opacity: 1, duration: 0.6 }, 20.0);
+
+      // ── 03 莖運輸 ────────────────────────────────
+      tl.fromTo("#s3-title", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 24.2);
+      tl.fromTo("#tubeA", { strokeDashoffset: 660, strokeDasharray: 660 }, { strokeDashoffset: 0, duration: 1.2, ease: "power2.inOut" }, 24.7);
+      tl.fromTo("#tubeB", { strokeDashoffset: 660, strokeDasharray: 660 }, { strokeDashoffset: 0, duration: 1.2, ease: "power2.inOut" }, 24.9);
+      ["#s3c1", "#s3c2", "#s3c3"].forEach((sel, i) => {
+        tl.fromTo(sel, { opacity: 0, x: 46 }, { opacity: 1, x: 0, duration: 0.55, ease: "power2.out" }, 25.4 + i * 0.5);
+      });
+      gsap.utils.toArray("#stemUp .rise").forEach((d, i) => {
+        tl.fromTo(d, { y: 0, opacity: 0 }, { y: -560, opacity: 1, duration: 3.0, ease: "none" }, 26.4 + i * 0.55);
+      });
+      gsap.utils.toArray("#stemDown .sink").forEach((d, i) => {
+        tl.fromTo(d, { y: 0, opacity: 0 }, { y: 560, opacity: 1, duration: 3.2, ease: "none" }, 27.2 + i * 0.7);
+      });
+      tl.to("#s3-end", { opacity: 1, duration: 0.6 }, 33.2);
+
+      // ── 04 花 → 果實 → 種子 ──────────────────────
+      tl.fromTo("#s4-title", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 36.2);
+      tl.fromTo("#st1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 36.8);
+      tl.fromTo("#s4-flower", { scale: 0.4, transformOrigin: "50% 50%" }, { scale: 1, duration: 1.0, ease: "back.out(1.8)" }, 36.9);
+      tl.fromTo("#ar1", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 39.3);
+      tl.fromTo("#st2", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 40.2);
+      tl.fromTo("#s4-fruit", { scale: 0.3, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.9, ease: "back.out(1.6)" }, 40.3);
+      tl.to("#s4-flower", { scale: 0.9, transformOrigin: "50% 50%", duration: 0.6 }, 40.3);
+      tl.fromTo("#ar2", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 42.7);
+      tl.fromTo("#st3", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 43.6);
+      gsap.utils.toArray("#s4-seeds ellipse").forEach((e, i) => {
+        tl.fromTo(e, { opacity: 0, scale: 0.3, transformOrigin: "50% 50%" },
+          { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2)" }, 43.7 + i * 0.18);
+      });
+      tl.fromTo("#s4-seeds path", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 }, 44.8);
+      tl.to("#s4-end", { opacity: 1, duration: 0.7 }, 46.2);
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
