@@ -16,6 +16,7 @@
 - [ ] 階段三：累積首批文章並公開發表
 - [ ] 階段四：建立可重複使用的教材／活動素材庫
   - [x] 第一個完整單元：115-1 三上自然「植物的構造和生長」（教案＋21 頁簡報＋4 段旁白動畫＋教學網頁）
+  - [x] 教學網頁加入兩人區網即時配對搶答遊戲（Node 零依賴伺服器＋30 題題庫）
 
 ## 資料夾結構
 <!-- 初始化時自動掃描生成，之後新增檔案要更新 -->
@@ -27,7 +28,7 @@
 └─ 115-1_三上自然_植物的構造和生長/
    ├─ 教案/            # 教案 docx 與產生腳本
    ├─ 簡報/            # 教學簡報 pptx（21 頁）
-   ├─ 教學網頁/        # 整合網頁 index.html、slides、media、downloads
+   ├─ 教學網頁/        # 整合網頁 index.html、battle.html、server.js、questions.json、start-battle.bat、slides、media、downloads
    └─ 影片/plants/     # HyperFrames 四段動畫原始碼與旁白腳本
 ```
 
