@@ -14,12 +14,12 @@
   - `影片/plants/`：HyperFrames 四段動畫原始碼、`add_voice.py`、`deck/build_deck.js`
 - 網頁已完成瀏覽器 QA：換頁、動畫播放、測驗計分／重測、抽籤不重複、計時器倒數
 - `教學網頁/downloads` 與 `教案/`、`簡報/` 版本一致（pptx 均為 21 頁）
-- 尚未 commit（整個單元資料夾仍為 untracked）
+- 已 commit ＋ push（`a298711` 單元教材、`c3abf77` handoff）
 
 ## ➡️ 下一步
-1. `git add` ＋ commit ＋ push 本次單元（`.gitignore` 已排除 node_modules、字型、renders、thumbs、silent）
-2. 上課前實測：單槍 16:9、動畫音量、抽籤名單改成班級座號
-3. 課後把教學省思補進 docx 第十三節，並依回饋調整測驗題目
+1. 上課前實測：單槍 16:9、動畫音量、抽籤名單改成班級座號
+2. 課後把教學省思補進 docx 第十三節，並依回饋調整測驗題目
+3. 若要改內容：重跑 `教案/make_lesson_plan.py` 或 `影片/plants/deck/build_deck.js`，完成後把 docx／pptx 重新複製到 `教學網頁/downloads`
 
 ## ⚠️ 注意事項
 - 網頁建議用 `python -m http.server 8765` 開啟（工作目錄 `教學網頁`）；直接雙擊 index.html 也可，但部分瀏覽器對本機 mp4 較嚴格
@@ -29,6 +29,6 @@
 - 學生資料只用座號，不出現姓名、聯絡方式或照片
 
 ## 🕐 最後更新
-- 時間：2026-10-22 22:54
+- 時間：2026-10-22 23:13
 - 更新者：OpenCode（DeepSeek V4.1 Flash Free）@ DESKTOP-4475O68
-- Git push：✅ 已推（a298711）
+- Git push：✅ 已推（c3abf77）
