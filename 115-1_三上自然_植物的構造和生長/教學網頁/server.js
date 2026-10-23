@@ -320,6 +320,18 @@ const server = http.createServer(async (req, res) => {
 
   const pathname = url.pathname;
 
+  /* 允許 GitHub Pages（或任何網站）跨網域呼叫 /api/*；對戰只用一次性 token，不靠 cookie。 */
+  if (pathname.indexOf('/api/') === 0) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Max-Age', '600');
+    if (req.method === 'OPTIONS') {
+      res.writeHead(204);
+      return res.end();
+    }
+  }
+
   try {
     if (pathname === '/api/health' && req.method === 'GET') {
       return json(res, {

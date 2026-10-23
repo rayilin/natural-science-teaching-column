@@ -557,13 +557,28 @@
       <iframe id="battleFrame" src="battle.html?embed=1" title="植物生長對戰" loading="lazy" allow="autoplay"></iframe>
     </div>
 
-    <div class="battle-note">
+    <div class="battle-note" id="battleNote">
       <span><b>老師：</b>先雙擊 <code>start-battle.bat</code> 啟動伺服器。</span>
       <span><b>學生：</b>開 <code>http://老師電腦IP:8765/battle.html</code>，輸入名字即可配對。</span>
       <span><b>規則：</b>每題 20 秒，答錯換對手答；10 題結束結算勝負。</span>
     </div>
   </div>
 </section>
+
+<script src="battle-api.js"></script>
+<script>
+(function () {
+  var api = (typeof window.BATTLE_API === 'string') ? window.BATTLE_API : '';
+  if (!api) return;
+  var note = document.getElementById('battleNote');
+  if (note) {
+    note.innerHTML =
+      '<span><b>線上版：</b>兩人各自開這個網頁，往下捲到對戰區，輸入名字即可配對。</span>' +
+      '<span><b>教室版：</b>想用區網（不依賴網路）就雙擊 <code>start-battle.bat</code>。</span>' +
+      '<span><b>規則：</b>每題 20 秒，答錯換對手答；10 題結束結算勝負。</span>';
+  }
+})();
+</script>
 
 <footer>
   <div class="wrap">

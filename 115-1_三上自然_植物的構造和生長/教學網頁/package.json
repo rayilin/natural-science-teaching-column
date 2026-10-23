@@ -1,0 +1,13 @@
+{
+  "name": "plant-battle-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "植物生長對戰：區網與雲端配對伺服器（Node 內建模組，零依賴）",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

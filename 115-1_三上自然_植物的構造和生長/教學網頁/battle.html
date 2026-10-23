@@ -215,6 +215,7 @@
 <main id="app" aria-live="polite"></main>
 <div id="notice" hidden></div>
 
+<script src="battle-api.js"></script>
 <script>
 (function () {
   'use strict';
@@ -223,6 +224,20 @@
   var noticeEl = document.getElementById('notice');
   var EMBED = new URLSearchParams(location.search).get('embed') === '1';
   if (EMBED) document.body.classList.add('embed');
+
+  /* 遠端後端位址：?api=https://xxx 或 battle-api.js 的 window.BATTLE_API；
+     留空 = 用同一個網站的 /api（老師電腦區網模式）。 */
+  var API_BASE = (function () {
+    var v = '';
+    try { v = new URLSearchParams(location.search).get('api') || ''; } catch (e) { v = ''; }
+    if (!v && typeof window.BATTLE_API === 'string') v = window.BATTLE_API;
+    return String(v || '').replace(/\/+$/, '');
+  })();
+  function api(path) { return API_BASE + path; }
+  if (API_BASE) {
+    var netEl = document.querySelector('.net');
+    if (netEl) netEl.textContent = '線上配對';
+  }
 
   var state = {
     myId: null, token: null, myName: '', oppId: null, oppName: '對手',
@@ -298,7 +313,7 @@
 
   /* ── 啟動 ── */
   function boot() {
-    fetch('/api/health', { cache: 'no-store' })
+    fetch(api('/api/health'), { cache: 'no-store' })
       .then(function (r) { if (!r.ok) throw new Error('bad'); return r.json(); })
       .then(function (d) {
         if (!d || !d.ok) throw new Error('bad');
@@ -345,19 +360,22 @@
   function renderOffline(reason) {
     var host = location.protocol.indexOf('http') === 0 ? location.hostname : '老師電腦的 IP';
     if (host === 'localhost' || host === '127.0.0.1') host = '老師電腦的 IP';
-    app.innerHTML =
-      '<div class="card offline">' +
-        '<div class="bigicon">🔌</div>' +
-        '<h1>先啟動對戰伺服器</h1>' +
-        '<p class="sub">' + (reason ? esc(reason) : '這個頁面需要教室電腦上的對戰伺服器，才能讓兩位小朋友配對。') + '</p>' +
+    if (!reason && API_BASE) reason = '線上對戰伺服器沒有回應。免費主機閒置後會休眠，第一次連線可能要等 30～60 秒。';
+    var steps = API_BASE ? '' :
         '<ol>' +
           '<li>在老師電腦打開 <code>教學網頁</code> 資料夾。</li>' +
           '<li>雙擊 <code>start-battle.bat</code>（或執行 <code>node server.js</code>）。</li>' +
           '<li>學生用同一個 Wi-Fi 開 <code>http://' + esc(host) + ':8765/battle.html</code>。</li>' +
           '<li>Windows 防火牆詢問時，請允許 Node.js 存取私人網路。</li>' +
-        '</ol>' +
+        '</ol>';
+    app.innerHTML =
+      '<div class="card offline">' +
+        '<div class="bigicon">🔌</div>' +
+        '<h1>' + (API_BASE ? '正在連線對戰伺服器' : '先啟動對戰伺服器') + '</h1>' +
+        '<p class="sub">' + (reason ? esc(reason) : '這個頁面需要教室電腦上的對戰伺服器，才能讓兩位小朋友配對。') + '</p>' +
+        steps +
         '<button class="btn primary" id="retry">重新檢查</button>' +
-        '<p class="tiny">已經啟動卻看到這個畫面？請確認網址的埠號是 8765，並重新整理。</p>' +
+        '<p class="tiny">' + (API_BASE ? '一直連不上？請確認線上後端是否正常，或改用教室區網版。' : '已經啟動卻看到這個畫面？請確認網址的埠號是 8765，並重新整理。') + '</p>' +
       '</div>';
     document.getElementById('retry').addEventListener('click', boot);
   }
@@ -374,7 +392,7 @@
     var btn = document.getElementById('joinBtn');
     if (btn) { btn.disabled = true; btn.textContent = '連線中…'; }
 
-    fetch('/api/join', {
+    fetch(api('/api/join'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: name })
@@ -396,7 +414,7 @@
   /* ── SSE ── */
   function connect() {
     if (es) es.close();
-    es = new EventSource('/api/stream?id=' + encodeURIComponent(state.myId) + '&token=' + encodeURIComponent(state.token));
+    es = new EventSource(api('/api/stream?id=' + encodeURIComponent(state.myId) + '&token=' + encodeURIComponent(state.token)));
     es.onopen = function () {
       sseErrors = 0;
       if (state.phase === 'question' || state.phase === 'reveal') hideNotice();
@@ -413,7 +431,7 @@
       if (sseErrors === 1) showNotice('連線中斷，正在重新連線…', 'warn');
       if (sseErrors === 3) {
         // 伺服器可能重啟過，確認這個身分是否還有效
-        fetch('/api/session?id=' + encodeURIComponent(state.myId) + '&token=' + encodeURIComponent(state.token), { cache: 'no-store' })
+        fetch(api('/api/session?id=' + encodeURIComponent(state.myId) + '&token=' + encodeURIComponent(state.token)), { cache: 'no-store' })
           .then(function (r) {
             if (r.status === 404) renderSessionLost();
           })
@@ -638,7 +656,7 @@
     var feed = document.getElementById('feed');
     if (feed) feed.textContent = '已送出，等待結果…';
 
-    fetch('/api/answer', {
+    fetch(api('/api/answer'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id: state.myId, token: state.token, choice: i })
@@ -745,7 +763,7 @@
   function rematch() {
     var b = document.getElementById('rematchBtn');
     if (b) { b.disabled = true; b.textContent = '等待對手… (1/2)'; }
-    fetch('/api/rematch', {
+    fetch(api('/api/rematch'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id: state.myId, token: state.token })
@@ -808,7 +826,7 @@
 
   function leave() {
     if (state.myId && state.token) {
-      fetch('/api/leave', {
+      fetch(api('/api/leave'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: state.myId, token: state.token })
