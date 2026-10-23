@@ -6,4 +6,4 @@
  *
  * 也可以不改這個檔案，直接在網址加上 ?api=https://plant-battle.onrender.com
  */
-window.BATTLE_API = '';
+window.BATTLE_API = 'https://plant-battle.onrender.com';
