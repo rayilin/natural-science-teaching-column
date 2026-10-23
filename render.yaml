@@ -1,6 +1,6 @@
 # Render 免費方案部署設定（對戰伺服器）
 #
-# 用法：Render 後台 → New → Blueprint → 選這個 repo → Apply。
+# 用法：Render 後台 → New + → Blueprint → 選 rayilin/natural-science-teaching-column → Apply。
 # 部署完成後會得到像 https://plant-battle.onrender.com 的網址，
 # 再把它填進 教學網頁/battle-api.js 的 window.BATTLE_API。
 #
@@ -11,9 +11,8 @@ services:
     runtime: node
     plan: free
     region: singapore
-    rootDir: 115-1_三上自然_植物的構造和生長/教學網頁
     buildCommand: echo "零依賴，不需要建置"
-    startCommand: node server.js
+    startCommand: node battle-server.js
     healthCheckPath: /api/health
     envVars:
       - key: NODE_VERSION
