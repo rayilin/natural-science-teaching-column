@@ -4,7 +4,16 @@
 
 ## ⏯️ 目前做到哪
 完成第一份完整單元教材：**115-1 三上自然｜植物的構造和生長**（翰林版第一單元）。
-含教案（Word 6 頁）、教學簡報（21 頁，第 4／7／9／14 頁為台灣中文女聲旁白動畫）、10 題互動測驗、整合教學網頁（簡報播放器＋測驗＋參考影片＋抽籤＋計時器），以及網頁最下方的**兩人區網即時配對搶答遊戲**。
+含教案（Word 6 頁）、教學簡報（21 頁，第 4／7／9／14 頁為台灣中文女聲旁白動畫）、10 題互動測驗、整合教學網頁（簡報播放器＋測驗＋參考影片＋抽籤＋計時器），以及網頁最下方的**兩人即時配對搶答遊戲**。
+教材已上線 GitHub Pages（repo 已設為公開）：<https://rayilin.github.io/natural-science-teaching-column/>
+
+## 🌐 上線狀態（2026-10-23）
+- 公開網址：<https://rayilin.github.io/natural-science-teaching-column/>
+- 對戰頁：`…/battle.html`；教案與簡報在 `…/downloads/`（中文檔名正常）
+- 發佈方式：`.github/workflows/pages.yml`（push main 自動發佈），會排除 `server.js`、`questions.json`、`start-battle.bat`、`package.json`，答案檔實測回 404
+- 對戰後端改成可指向雲端：`教學網頁/battle-api.js` 的 `window.BATTLE_API`（空字串＝同網站／區網），`server.js` 已加 CORS（含 OPTIONS 204）
+- 雲端部署檔已備好：`render.yaml`＋根目錄 `battle-server.js` 入口，**尚未在 Render 建立服務**（需要老師 GitHub 登入授權），建立後把網址填進 `battle-api.js` 即完成
+- 詳細步驟：`教學網頁/部署與上線說明.md`
 
 ## 🚦 目前狀態
 - 教材資料夾：`115-1_三上自然_植物的構造和生長/`
@@ -30,10 +39,11 @@
 - `questions.json`、`server.js`、`start-battle.bat` 已封鎖靜態存取，答案不會下傳到作答前的瀏覽器。
 
 ## ➡️ 下一步
-1. 上課前實測：單槍 16:9、動畫音量、抽籤名單改成班級座號
-2. 用兩台真實平板／電腦跑一場完整對戰，確認校園 Wi-Fi 的 AP 隔離沒有擋住裝置互連
-3. 課後把教學省思補進 docx 第十三節，並依回饋調整測驗題目
-4. 若要改內容：重跑 `教案/make_lesson_plan.py` 或 `影片/plants/deck/build_deck.js`，完成後把 docx／pptx 重新複製到 `教學網頁/downloads`
+1. 在 Render 建 Blueprint（`render.yaml`）→ 取得 `https://plant-battle.onrender.com` → 填進 `教學網頁/battle-api.js` 的 `window.BATTLE_API` → push，線上對戰即完成
+2. 上課前實測：單槍 16:9、動畫音量、抽籤名單改成班級座號
+3. 用兩台真實平板／電腦跑一場完整對戰，確認校園 Wi-Fi 的 AP 隔離沒有擋住裝置互連
+4. 課後把教學省思補進 docx 第十三節，並依回饋調整測驗題目
+5. 若要改內容：重跑 `教案/make_lesson_plan.py` 或 `影片/plants/deck/build_deck.js`，完成後把 docx／pptx 重新複製到 `教學網頁/downloads`（push 後 Pages 會自動更新）
 
 ## ⚠️ 注意事項
 - 一般教學網頁可用 `python -m http.server 8765` 開啟；但**對戰一定要用 `node server.js`**，否則頁面會顯示「先啟動對戰伺服器」
@@ -45,6 +55,6 @@
 - 學生資料只用座號，不出現姓名、聯絡方式或照片
 
 ## 🕐 最後更新
-- 時間：2026-10-22 23:47
+- 時間：2026-10-23 09:50
 - 更新者：OpenCode（DeepSeek V4.1 Flash Free）@ DESKTOP-4475O68
-- Git push：✅ 已推（b039398 對戰功能）
+- Git push：✅ 已推（e33481f Render 入口與上線說明；54a5707 Pages 部署與 CORS）
