@@ -15,6 +15,14 @@
 - 雲端部署檔已備好：`render.yaml`＋根目錄 `battle-server.js` 入口，**尚未在 Render 建立服務**（需要老師 GitHub 登入授權），建立後把網址填進 `battle-api.js` 即完成
 - 詳細步驟：`教學網頁/部署與上線說明.md`
 
+## 🧰 可重用的技能（2026-10-23 建立）
+- `teaching-site`：把這份教材的整套流程變成技能（教案→簡報→旁白動畫→教學網頁→測驗→對戰→上線→驗收）
+  - 位置：`C:\Users\rayi\.config\opencode\skills\teaching-site\`
+  - `scripts/new_unit.js`：一鍵建新單元骨架（含對戰模板）
+  - `scripts/check_site.js`：成品自動檢查（陣列格式、檔案存在、題庫 30 題、答案是否外洩）
+  - `templates/`：index.html、battle.html、server.js、pages.yml、render.yaml 等可直接複製的版本
+  - 用法：對 Agent 說「幫我做 <單元> 的教學網頁」就會自動觸發
+
 ## 🚦 目前狀態
 - 教材資料夾：`115-1_三上自然_植物的構造和生長/`
   - `教案/教案_植物的構造和生長.docx`：6 頁，含「七、隨堂測驗（10 題）」與評量規準
