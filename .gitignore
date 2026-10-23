@@ -4,3 +4,6 @@ desktop.ini
 .env
 *.key
 credentials.*
+
+# 獨立子專案（有自己的 repo，見該資料夾的 AGENTS.md）
+磁鐵好好玩/
