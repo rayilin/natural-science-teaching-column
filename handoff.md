@@ -1,4 +1,4 @@
-# 交接檔（handoff.md）
+﻿# 交接檔（handoff.md）
 
 > 任何 Agent、任何電腦接手前**必讀**；收工時**必更新**。本檔只放交接必需的精簡資訊，詳細脈絡放 Obsidian（L3）。
 
@@ -12,7 +12,9 @@
 - 對戰頁：`…/battle.html`；教案與簡報在 `…/downloads/`（中文檔名正常）
 - 發佈方式：`.github/workflows/pages.yml`（push main 自動發佈），會排除 `server.js`、`questions.json`、`start-battle.bat`、`package.json`，答案檔實測回 404
 - 對戰後端改成可指向雲端：`教學網頁/battle-api.js` 的 `window.BATTLE_API`（空字串＝同網站／區網），`server.js` 已加 CORS（含 OPTIONS 204）
-- 雲端部署檔已備好：`render.yaml`＋根目錄 `battle-server.js` 入口，**尚未在 Render 建立服務**（需要老師 GitHub 登入授權），建立後把網址填進 `battle-api.js` 即完成
+- 雲端部署檔已備好：`render.yaml`＋根目錄 `battle-server.js` 入口
+- **對戰已上雲端**：Render 服務 `plant-battle`（新加坡・Free）→ <https://plant-battle.onrender.com>，`battle-api.js` 已填入，Pages 的對戰區直接連雲端
+- 雲端已端對端實測：兩人配對、出題不洩漏答案、答錯換手、揭曉正解、房間自動清除；後端 `questions.json`／`server.js` 均 404
 - 詳細步驟：`教學網頁/部署與上線說明.md`
 
 ## 🧰 可重用的技能（2026-10-23 建立）
@@ -47,9 +49,9 @@
 - `questions.json`、`server.js`、`start-battle.bat` 已封鎖靜態存取，答案不會下傳到作答前的瀏覽器。
 
 ## ➡️ 下一步
-1. 在 Render 建 Blueprint（`render.yaml`）→ 取得 `https://plant-battle.onrender.com` → 填進 `教學網頁/battle-api.js` 的 `window.BATTLE_API` → push，線上對戰即完成
-2. 上課前實測：單槍 16:9、動畫音量、抽籤名單改成班級座號
-3. 用兩台真實平板／電腦跑一場完整對戰，確認校園 Wi-Fi 的 AP 隔離沒有擋住裝置互連
+1. 上課前實測：單槍 16:9、動畫音量、抽籤名單改成班級座號
+2. 上課前 5 分鐘先開一次對戰頁（喚醒 Render 免費執行個體，避免第一組等 30～60 秒）
+3. 用兩台真實平板／電腦跑一場完整對戰，確認校園 Wi-Fi 與瀏覽器都正常（雲端版不依賴同一個 Wi-Fi）
 4. 課後把教學省思補進 docx 第十三節，並依回饋調整測驗題目
 5. 若要改內容：重跑 `教案/make_lesson_plan.py` 或 `影片/plants/deck/build_deck.js`，完成後把 docx／pptx 重新複製到 `教學網頁/downloads`（push 後 Pages 會自動更新）
 
@@ -63,6 +65,6 @@
 - 學生資料只用座號，不出現姓名、聯絡方式或照片
 
 ## 🕐 最後更新
-- 時間：2026-10-23 09:50
+- 時間：2026-10-23 10:45
 - 更新者：OpenCode（DeepSeek V4.1 Flash Free）@ DESKTOP-4475O68
-- Git push：✅ 已推（e33481f Render 入口與上線說明；54a5707 Pages 部署與 CORS）
+- Git push：✅ 已推（b4e481c 對戰接上 Render；766a240 IP 備查）
